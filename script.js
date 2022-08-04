@@ -30,13 +30,11 @@ var fetchData = function(city){
             return response.json()
             .then(function(data){
                 //display in HTML here
-
-                console.log(JSON.parse('data.list[0].weather.icon'));
                 dayD(data.list[0]);
-                dayD(data.list[8]);
-                dayD(data.list[15]);
-                dayD(data.list[22]);
+                dayD(data.list[12]);
+                dayD(data.list[20]);
                 dayD(data.list[30]);
+                dayD(data.list[39]);
             })
         } else {
             alert("Something went wrong. Please try again");
@@ -60,16 +58,17 @@ var dayD = function(data){
     var temp = Math.round(1.8*(data.main.temp-273) + 32);
     var hum = data.main.humidity;
     var wind = data.wind.speed;
-    // var icon = JSON.stringify(data.weather.icon);
-    // console.log(icon);
-
-    // var cardImage = document.createElement("img");
-    // cardImage.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
-    // cardBody.append(cardImage);
+    var icon = data.weather[0].icon;
+    console.log(icon);
 
     var cardEl = document.createElement("div");
-    cardEl.classList.add("card", "border-top", "mb3");
+    cardEl.classList.add("card", "border-top", "mb3", "bg-info");
     var cardBody = document.createElement("div");
+
+    var cardImage = document.createElement("img");
+    cardImage.src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
+    cardBody.append(cardImage);
+
 
     var cardTitle = document.createElement("h5");
     cardTitle.textContent = date;
